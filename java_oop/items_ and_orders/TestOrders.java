@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 public class TestOrders {
     public static void main(String[] args) {
+       
     
         // Menu items
         Item item1 = new Item();
@@ -59,7 +60,8 @@ public class TestOrders {
         order3.ready=true;
         System.out.printf("Name: %s\n", order3.name);
         System.out.printf("Total: %s\n", order3.total);
-        System.out.printf("Total: %s\n", order3.ready);
+        System.out.printf("ready: %s\n", order3.ready);
+       
 
 
         // order 4
@@ -70,3 +72,4 @@ public class TestOrders {
 
     }
 }
+ 
