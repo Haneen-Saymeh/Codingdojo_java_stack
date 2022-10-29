@@ -94,6 +94,17 @@ order2.display();
 order3.display();
 order4.display();
 
+/* ============ add items to menu============= */
+
+CoffeeKiosk coffeek1 = new CoffeeKiosk();
+coffeek1.addItemToMenu(0, "Banana",2.00);
+coffeek1.addItemToMenu(1, "Coffee",1.50);
+coffeek1.addItemToMenu(2, "latte",4.50);
+coffeek1.displayMenu();
+coffeek1.newOrder();
+
+
+
 
 
 

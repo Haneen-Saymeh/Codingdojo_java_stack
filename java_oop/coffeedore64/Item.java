@@ -1,16 +1,19 @@
 public class Item{
+    private int index;
     private String name;
     private double price;
-    private int index;
+    
 
     public  Item(){
        
     }
 
     
-public  Item(String itemName, double itemPrice){
-        this.name = itemName;
-        this.price = itemPrice;
+public  Item(int index, String name, double price){
+        this.index= index;
+        this.name = name;
+        this.price = price;
+        
 
     }
 
