@@ -1,0 +1,29 @@
+@charset "ISO-8859-1";
+
+.container{
+	margin: auto 0;
+	width: 800px;
+	height: 800px;
+	padding:10px;
+	margin-top: 20px;
+	
+}
+
+h1{
+	text-align: center;
+}
+
+section {
+	margin-left: 700px;
+	width: 300px;
+	height: 500px;
+	background-color: green;
+	color: white;
+	padding: 50px;
+}
+
+h5 {
+	margin-left: 700px;
+	margin-top: 100px;
+	
+}
