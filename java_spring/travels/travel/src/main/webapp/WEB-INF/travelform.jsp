@@ -40,7 +40,8 @@
        <td><c:out value="${travel.vendor}"></c:out></td>
        <td><c:out value="${travel.amount}"></c:out></td>
        <td><a href="/travels/${travel.id}/edit">Edit</a>|
-       <form:form action="/travels/${travel.id}/del" method="post">
+       <form:form action="/travels/${travel.id}" method="post">
+       <input type="hidden" name="_method" value="delete">
 					<button class="deleteBtn">Delete</button>
 				</form:form>
        

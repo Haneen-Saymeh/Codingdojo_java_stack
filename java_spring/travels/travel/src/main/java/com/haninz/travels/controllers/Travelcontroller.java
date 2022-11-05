@@ -37,8 +37,10 @@ public class Travelcontroller {
 	}
 	
 	@PostMapping("/create")
-	public String create(@Valid @ModelAttribute("travel") Travel travel, BindingResult result) {
+	public String create(@Valid @ModelAttribute("travel") Travel travel, BindingResult result, Model model) {
 		if (result.hasErrors()) {
+			List <Travel> travels = travelService.AllTravels();
+			model.addAttribute("travels", travels);
             return "travelform.jsp";
         } else {
             travelService.createTravel(travel);
@@ -46,7 +48,7 @@ public class Travelcontroller {
         }
 	}
 	
-	@PostMapping(value = "/travels/{id}/del")
+	@DeleteMapping(value = "/travels/{id}")
 	public String del(@PathVariable("id")Long id) {
 		travelService.deleteTravel(id);
 		return "redirect:/travels";
