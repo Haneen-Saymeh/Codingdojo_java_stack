@@ -18,37 +18,39 @@
 </head>
 <body>
 
-<h2>Edit an expense!</h2>
-<form:form action="/travels/${travel.id}" method="post" modelAttribute="travel">
+<h2>Edit an language!</h2>
+<form:form action="/languages/${language.id}" method="post" modelAttribute="language">
  <input type="hidden" name="_method" value="put">
  
-  <div class="form-group">
-    <form:label path="name">Expense Name</form:label>
+   <div class="form-group">
+    <form:label path="name">Name</form:label>
     <form:errors path="name" class="text-danger" />
     <form:input  path="name"/>
   </div>
   
   <div class="form-group">
-    <form:label path="vendor">Vendor</form:label>
-    <form:errors path="vendor" class="text-danger" />
-    <form:input  path="vendor"/>
+    <form:label path="creator">Creator</form:label>
+    <form:errors path="creator" class="text-danger" />
+    <form:input  path="creator"/>
   </div>
   
   <div class="form-group">
-    <form:label path="amount">Amount</form:label>
-    <form:errors path="amount" class="text-danger" />
-    <form:input type= "number" path="amount"/>
+    <form:label path="version">Version</form:label>
+    <form:errors path="version" class="text-danger" />
+    <form:input  path="version"/>
   </div>
   
   
-  <div class="form-group">
-    <form:label path="description">Description</form:label>
-        <form:errors path="description"  class="text-danger" />
-        <form:textarea path="description"/>
-  </div>
+  
   
    <button type="submit" class="btn btn-primary">Update!</button>
 </form:form>
+
+<div><a href="/languages">Dashboard</a></div>
+<form action="/languages/${language.id}" method="post">
+<input type="hidden" name="_method" value="delete">
+					 <input type="submit" value="Delete">
+</form>
 
 </body>
 </html>

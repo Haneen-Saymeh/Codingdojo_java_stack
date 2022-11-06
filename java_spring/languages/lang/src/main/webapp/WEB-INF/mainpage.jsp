@@ -17,32 +17,32 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Save Travels</h1>
+<h1>Programming languaegs</h1>
 <table class="table">
   <thead class="thead-dark">
     <tr>
      
-      <th scope="col">Expense</th>
-      <th scope="col">Vendor</th>
-      <th scope="col">Amount</th>
+      <th scope="col">Name</th>
+      <th scope="col">Creator</th>
+      <th scope="col">Vesrion</th>
       <th scope="col">Actions</th>
      
     </tr>
   </thead>
   <tbody>
-  <c:forEach var="travel" items="${travels}">
+  <c:forEach var="language" items="${languages}">
        
    
     <tr>
      
        
-       <td><a href="/travels/${travel.id}"><c:out value="${travel.name}"></c:out></a></td>
-       <td><c:out value="${travel.vendor}"></c:out></td>
-       <td><c:out value="${travel.amount}"></c:out></td>
-       <td><a href="/travels/${travel.id}/edit">Edit</a>|
-       <form:form action="/travels/${travel.id}" method="post">
+       <td><a href="/languages/${language.id}"><c:out value="${language.name}"></c:out></a></td>
+       <td><c:out value="${language.creator}"></c:out></td>
+       <td><c:out value="${language.version}"></c:out></td>
+       <td><a href="/languages/edit/${language.id}">Edit</a>|
+       <form:form action="/languages/${language.id}" method="post">
        <input type="hidden" name="_method" value="delete">
-					<button class="deleteBtn">Delete</button>
+					 <input type="submit" value="Delete">
 				</form:form>
        
        
@@ -54,32 +54,28 @@
     
   </tbody>
 </table>
-<h2>Add an expense!</h2>
-<form:form action="/create" method="post" modelAttribute="travel">
+<h2>Add a language!</h2>
+<form:form action="/create" method="post" modelAttribute="language">
   <div class="form-group">
-    <form:label path="name">Expense Name</form:label>
+    <form:label path="name">Name</form:label>
     <form:errors path="name" class="text-danger" />
     <form:input  path="name"/>
   </div>
   
   <div class="form-group">
-    <form:label path="vendor">Vendor</form:label>
-    <form:errors path="vendor" class="text-danger" />
-    <form:input  path="vendor"/>
+    <form:label path="creator">Creator</form:label>
+    <form:errors path="creator" class="text-danger" />
+    <form:input  path="creator"/>
   </div>
   
   <div class="form-group">
-    <form:label path="amount">Amount</form:label>
-    <form:errors path="amount" class="text-danger" />
-    <form:input type="number" path="amount"/>
+    <form:label path="version">Version</form:label>
+    <form:errors path="version" class="text-danger" />
+    <form:input  path="version"/>
   </div>
   
   
-  <div class="form-group">
-    <form:label path="description">Description</form:label>
-        <form:errors path="description"  class="text-danger" />
-        <form:textarea path="description"/>
-  </div>
+ 
   
    <button type="submit" class="btn btn-primary">Submit</button>
 </form:form>
