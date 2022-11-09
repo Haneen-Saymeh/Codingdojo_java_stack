@@ -24,61 +24,56 @@
 <div  style="display: flex; justify-content: space-around "  >
     <div style="width:500px; height:500px; padding: 15px  "  >
         <h1>Rgistration!</h1>
-    <form  method="post"  action="/reg"  style="margin-top: 20px"   >
+     <form:form action="/register" method="post" modelAttribute="newUser">
        
         <div class="form-group">
-            <label for="exampleInputEmail1">First Name</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="firstName">
+            <form:label path="userName" >Name</form:label>
+            <form:errors path="userName" class="text-danger" />
+            <form:input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" path="userName"></form:input>
         </div>
 
         <div class="form-group">
-            <label for="exampleInputEmail1">Last Name</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="lastName">
-          </div>
-
-          <div class="form-group">
-            <label for="exampleInputEmail1">Birthday</label>
-            <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="birthday">
-        </div>
-
-
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+          <form:label path="email" >Email address</form:label>
+          <form:errors path="email" class="text-danger" />
+          <form:input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" path="email"></form:input>
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+          <form:label path="password">Password</form:label>
+           <form:errors path="password" class="text-danger" />
+          <form:input type="password" class="form-control" id="exampleInputPassword1" path="password"></form:input>
         </div>
 
         <div class="form-group">
-            <label for="exampleInputPassword1">Confirm PW</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" name="conpassword">
+            <form:label path="confirm">Confirm PW</form:label>
+             <form:errors path="confirm" class="text-danger" />
+            <form:input type="password" class="form-control" id="exampleInputPassword1" path="confirm"></form:input>
           </div>
 
         
         <button type="submit" class="btn btn-primary">Register</button>
-      </form>
+      </form:form>
     </div>
 
 
 <div style="width:500px; height:500px; padding: 15px; margin-top: 10px "   >
   <h1>Login!</h1>
-  <form action="/login"  method="post" >
+  <form:form action="/login" method="post" modelAttribute="newLogin">
    
     <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+      <form:label  path="email">Email address</form:label>
+       <form:errors  path="email" class="text-danger" />
+      <form:input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" path="email" ></form:input>
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+      <form:label path="password">Password</form:label>
+       <form:errors path="password" class="text-danger" />
+      <form:input type="password" class="form-control" id="exampleInputPassword1" path="password"></form:input>
     </div>
 
     <button type="submit" class="btn btn-primary">Login!</button>
 
 
-  </form>
+  </form:form>
 </div>
 
 </div>
