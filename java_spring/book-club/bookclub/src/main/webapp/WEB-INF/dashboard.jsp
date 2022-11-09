@@ -17,43 +17,39 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h1>Welcome "${thisuser.userName}"</h1>
+<h3>Books from everyone shelves</h3>
 
-<a href="/search/topten">Top 10 Songs!!!</a>
-<a href="/songs/new">Add a new song</a>
+<a href="/logout">Logout</a>
+<a href="/books/new">Add to my shelf</a>
 
-<form action="/search/art">
-<input type="search" id="gsearch" name="artist">
- <button type="submit" class="btn btn-primary">Search artists</button>
- </form>
+
 <table class="table">
   <thead class="thead-dark">
     <tr>
      
-      <th scope="col">Name</th>
-      <th scope="col">Rating</th>
-      <th scope="col">Action</th>
+      <th scope="col">ID</th>
+      <th scope="col">title</th>
+      <th scope="col">Author Name</th>
+      <th scope="col">Posted By</th>
+     
       
      
     </tr>
   </thead>
   <tbody>
-  <c:forEach var="song" items="${songs}">
+  <c:forEach var="book" items="${books}">
        
    
     <tr>
      
-       
-       <td><a href="/songs/${song.id}"><c:out value="${song.title}"></c:out></a></td>
-       <td><c:out value="${song.rating}"></c:out></td>
+        <td><c:out value="${book.id}"></c:out></td>
+       <td><a href="/books/${book.id}"><c:out value="${book.title}"></c:out></a></td>
+       <td><c:out value="${book.author}"></c:out></td>
+        <td><c:out value="${book.user.userName}"></c:out></td>
       
        
-     <td>   <form:form action="/songs/${song.id}" method="post">
-       <input type="hidden" name="_method" value="delete">
-					 <input type="submit" value="Delete">
-				</form:form>
-       
-       
-       </td>
+  
       
     </tr>
      </c:forEach>

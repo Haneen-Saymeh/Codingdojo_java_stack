@@ -84,7 +84,7 @@ public class SongController {
 	
 	
 	
-	@GetMapping("/search/{artist}")
+	@GetMapping("/search/art")
 	public String onesong(@RequestParam(value="artist") String artist,Model model) {
 	List	<Song> songsby= songService.searchartist(artist);
 		model.addAttribute("songsby", songsby);

@@ -45,7 +45,7 @@
   <div class="form-group">
     <form:label path="age">Age</form:label>
     <form:errors path="age" class="text-danger" />
-    <form:input  path="age"/>
+    <form:input type="number" path="age"/>
   </div>
   
   
