@@ -29,7 +29,9 @@ public Book creatbook(Book book, Long id) {
 	
 }
 
-public Book updatebook(Book book) {
+public Book updatebook(Book book, Long id) {
+	Optional <User> updatedby = userRepository.findById(id);
+	book.setUser(updatedby.get());
 	return bookRepository.save(book);
 
 

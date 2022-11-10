@@ -117,9 +117,12 @@ model.addAttribute("books", books);
    
    @GetMapping("/books/{id}")
    public String showbook(@PathVariable("id") Long id, Model model,HttpSession session ) {
-	   if (session.getAttribute("user_id") != null)  return "redirect:/";
+	  
 	   Book thebook = bookService.findone(id);
 	   model.addAttribute("thebook", thebook);
+//	   Long user_id = (Long) session.getAttribute("user_id");
+      
+       model.addAttribute("user_id", session.getAttribute("user_id"));
 	   
 	   return "onebook.jsp";
    }
@@ -138,12 +141,15 @@ model.addAttribute("books", books);
    }
    
    @PutMapping("/books/{id}/edit")
-   public String updatebook(@Valid @ModelAttribute("book")Book book, BindingResult result) {
+   public String updatebook(@Valid @ModelAttribute("book")Book book, BindingResult result,HttpSession session) {
 	   if (result.hasErrors()) {
 		    return "editbook.jsp";
 	   }
 	   else {
-		   bookService.updatebook(book);
+		   Long user_id = (Long) session.getAttribute("user_id");
+		      
+	       bookService.updatebook(book, user_id);
+		  
 		   return "redirect:/books";
 		   
 		   

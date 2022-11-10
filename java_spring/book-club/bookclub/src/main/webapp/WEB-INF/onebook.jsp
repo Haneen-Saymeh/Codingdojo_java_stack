@@ -12,7 +12,7 @@
 <body>
 <h1><c:out value = "${thebook.title}"/></h1>
 <c:choose> 
-  <c:when test="${sessionScope.user_id == thebook.user.id}">
+  <c:when test="${user_id == thebook.user.id}">
    <p> you read <c:out value = "${thebook.title}"/></p>
    <p> Here are your thoughts</p>
   </c:when>
@@ -24,14 +24,21 @@
 
 
 <h3>Song rating: <c:out value = "${thebook.thoughts}"/></h3>
-<c:if test="${sessionScope.user_id == thebook.user.id}">
-<form action="/books/${thebook.id}" method="post">
+
+<c:if test="${user_id == thebook.user.id}" >
+        <form action="/books/${thebook.id}" method="post">
 <input type="hidden" name="_method" value="delete">
 					 <input type="submit" value="Delete">
 </form>
 <a href="/books/${thebook.id}/edit">Edit</a>|
-						
-					</c:if>
+     
+       
+      </c:if>
+
+
+
+
+
 
 
 <div><a href="/books">Back to shelves</a></div>
