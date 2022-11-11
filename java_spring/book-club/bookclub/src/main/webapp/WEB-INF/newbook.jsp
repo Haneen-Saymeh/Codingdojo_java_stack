@@ -17,6 +17,7 @@
 <h1>Add a book to your shelf!</h1>
 <a href="/books" >Back to shelves</a>
 <form:form action="/books/create" method="post" modelAttribute="book">
+<form:input type="hidden"  path="user" value="${thisuser.id}"/>
   <div class="form-group">
     <form:label  path="title">Title</form:label>
      <form:errors path="title" class="text-danger" />

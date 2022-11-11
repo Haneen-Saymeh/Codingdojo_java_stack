@@ -17,12 +17,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Welcome "${thisuser.userName}"</h1>
-<h3>Books from everyone shelves</h3>
+<h2>Hello, "${thisuser.userName}" Welcome to </h2>
+<h1>The Book Broker!</h1>
+
+<h3>Available Books to borrow!</h3>
 
 <a href="/logout">Logout</a>
-<a href="/bookmarket">Book Market</a>
-<a href="/books/new">Add to my shelf</a>
+<a href="/books">Back to shelves</a>
 
 
 <table class="table">
@@ -32,14 +33,15 @@
       <th scope="col">ID</th>
       <th scope="col">title</th>
       <th scope="col">Author Name</th>
-      <th scope="col">Posted By</th>
+      <th scope="col">Owner</th>
+       <th scope="col">Actions</th>
      
       
      
     </tr>
   </thead>
   <tbody>
-  <c:forEach var="book" items="${books}">
+  <c:forEach var="book" items="${booksnotin}">
        
    
     <tr>
@@ -48,6 +50,63 @@
        <td><a href="/books/${book.id}"><c:out value="${book.title}"></c:out></a></td>
        <td><c:out value="${book.author}"></c:out></td>
         <td><c:out value="${book.user.userName}"></c:out></td>
+         <td>
+        <c:choose> 
+  <c:when test="${user_id == book.user.id}">
+   <form action="/books/${book.id}" method="post">
+<input type="hidden" name="_method" value="delete">
+					 <input type="submit" value="Delete">
+</form>
+<a href="/books/${book.id}/edit">Edit</a>|
+  </c:when>
+  <c:otherwise>
+    <a href="/books/${book.id}/borrow">Borrow</a>|
+  </c:otherwise>
+</c:choose>
+      </td>
+      
+       
+  
+      
+    </tr>
+     </c:forEach>
+  
+    
+  </tbody>
+</table>
+
+<hr>
+<h1>The book you borrowd</h1>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+     
+      <th scope="col">ID</th>
+      <th scope="col">title</th>
+      <th scope="col">Author Name</th>
+      <th scope="col">Owner</th>
+       <th scope="col">Actions</th>
+     
+      
+     
+    </tr>
+  </thead>
+  <tbody>
+  <c:forEach var="bbook" items="${thisuser.bbooks}">
+       
+   
+    <tr>
+     
+        <td><c:out value="${bbook.id}"></c:out></td>
+       <td><a href="/books/${bbook.id}"><c:out value="${bbook.title}"></c:out></a></td>
+       <td><c:out value="${bbook.author}"></c:out></td>
+        <td><c:out value="${bbook.user.userName}"></c:out></td>
+         <td>
+       
+    <a href="/bookmarket/${bbook.id}/return">Return</a>|
+ 
+      </td>
       
        
   

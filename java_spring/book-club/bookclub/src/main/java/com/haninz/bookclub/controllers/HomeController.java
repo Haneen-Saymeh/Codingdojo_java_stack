@@ -94,7 +94,10 @@ model.addAttribute("books", books);
    }
    
    @GetMapping ("/books/new")
-   public String newbook(@ModelAttribute("book")Book book) {
+   public String newbook(@ModelAttribute("book")Book book,HttpSession session, Model model) {
+	   Long user_id = (Long) session.getAttribute("user_id");
+	   User thisUser = userService.findUserById(user_id);
+       model.addAttribute("thisuser", thisUser);
 	   return "newbook.jsp";
    }
    
@@ -105,9 +108,9 @@ model.addAttribute("books", books);
 	   }
 	   else {
 		   
-		   Long user_id = (Long) session.getAttribute("user_id");
+//		   Long user_id = (Long) session.getAttribute("user_id");
 	      
-	       bookService.creatbook(book, user_id);
+	       bookService.creatbook(book);
 	     
 		   return "redirect:/books";
 		   
@@ -147,6 +150,8 @@ model.addAttribute("books", books);
 	   }
 	   else {
 		   Long user_id = (Long) session.getAttribute("user_id");
+//		  User borrowuser = book.getUserb();
+		  
 		      
 	       bookService.updatebook(book, user_id);
 		  
@@ -154,6 +159,44 @@ model.addAttribute("books", books);
 		   
 		   
 	   }
+		  
+   }
+   
+   @GetMapping("/bookmarket")
+   public String bookmart(Model model, HttpSession session) {
+	   Long user_id = (Long) session.getAttribute("user_id");
+	   User thisUser = userService.findUserById(user_id);
+       model.addAttribute("thisuser", thisUser);
+       List <Book> bookstob= bookService.findallbooks();
+       model.addAttribute("bookstoborrow", bookstob);
+       List <Book> booknotin= bookService.findallbooksnotinuser(user_id);
+       model.addAttribute("booksnotin", booknotin);
+	   return "bookmart.jsp";
+   }
+   
+   @GetMapping("/books/{id}/borrow")
+   public String borrowbook(@PathVariable("id") Long id, Model model, HttpSession session){
+	   Book thisbook = bookService.findone(id);
+	   Long user_id = (Long) session.getAttribute("user_id");
+	   User thisUser = userService.findUserById(user_id);
+	   List <Book> borrowbooks= thisUser.getBbooks();
+	   borrowbooks.add(thisbook);
+	   thisUser.setBbooks(borrowbooks);
+	   bookService.borrowbook(thisbook, user_id);
+	   return "redirect:/bookmarket";
+	   
+	   
+	   
+	   
+   }
+   
+   @GetMapping("/bookmarket/{id}/return")
+	   public String bookreturn(@PathVariable("id") Long id) {
+	   Book thisbook = bookService.findone(id);
+	   bookService.returnbook(thisbook);
+	   return "redirect:/bookmarket";
+	   
+	   
    }
    
    

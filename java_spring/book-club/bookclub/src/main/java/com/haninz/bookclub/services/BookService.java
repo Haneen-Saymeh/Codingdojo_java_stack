@@ -21,21 +21,47 @@ public BookService(BookRepository bookRepository, UserRepository userRepository)
 	this.userRepository=userRepository;
 }
 
-public Book creatbook(Book book, Long id) {
-	Optional <User> postedby = userRepository.findById(id);
-	book.setUser(postedby.get());
+public Book creatbook(Book book) {
+//	Optional <User> postedby = userRepository.findById(id);
+//	book.setUser(postedby.get());
 	return bookRepository.save(book);
 	
 	
 }
 
-public Book updatebook(Book book, Long id) {
+public Book updatebook(Book book,Long id) {
 	Optional <User> updatedby = userRepository.findById(id);
 	book.setUser(updatedby.get());
+	Optional <User> borrower = userRepository.findById(book.getUserb().getId());
+	if(borrower.isPresent()) {
+		book.setUserb(borrower.get());
+		return bookRepository.save(book);
+
+		
+	}
+	else {
+		book.setUserb(null);
+	return bookRepository.save(book);
+	}
+
+
+}
+
+public Book borrowbook(Book book,Long id ) {
+	Optional <User> borrowedby = userRepository.findById(id);
+	book.setUserb(borrowedby.get());
 	return bookRepository.save(book);
 
 
 
+}
+
+public void returnbook(Book book) {
+	
+	book.setUserb(null);
+	
+	
+	 bookRepository.save(book);
 }
 
 public Book findone(Long id) {
@@ -50,6 +76,12 @@ public Book findone(Long id) {
 
 public List<Book> findallbooks(){
 	return bookRepository.findAll();
+}
+
+
+public List<Book> findallbooksnotinuser(Long id){
+	
+	return bookRepository.findByUserbIdIsOrUserIdIs(null,id);
 }
 
 public void deletebook(Long id) {

@@ -17,7 +17,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -42,6 +41,9 @@ public class Book {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="userb_id")
+    private User userb;
     
    
 	public Book() {
@@ -104,6 +106,15 @@ public class Book {
 		}
 		public void setUser(User user) {
 			this.user = user;
+		}
+		
+		
+		
+	public User getUserb() {
+			return userb;
+		}
+		public void setUserb(User userb) {
+			this.userb = userb;
 		}
 	@PrePersist
     protected void onCreate(){
