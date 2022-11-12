@@ -19,10 +19,10 @@ import com.haninz.projects.models.LoginUser;
 import com.haninz.projects.models.Project;
 import com.haninz.projects.models.Task;
 import com.haninz.projects.models.User;
-import com.haninz.projects.models.UserProject;
+
 import com.haninz.projects.services.ProjectService;
 import com.haninz.projects.services.TaskService;
-import com.haninz.projects.services.UserProjectService;
+
 import com.haninz.projects.services.UserService;
 
 @Controller
@@ -31,12 +31,12 @@ public class HomeController {
 	 private final UserService userService;
 	 private final ProjectService projectService;
 	 private final TaskService taskService;
-	 private final UserProjectService userProjectService;
-	public HomeController(UserService userService, ProjectService projectService,TaskService taskService, UserProjectService userProjectService) {
+
+	public HomeController(UserService userService, ProjectService projectService,TaskService taskService) {
 		this.userService= userService;
 		this.projectService=projectService;
 		this.taskService=taskService;
-		this.userProjectService=userProjectService;
+		
 		
 	}
 	   
@@ -82,7 +82,7 @@ public class HomeController {
 	   
 	   
 	   @GetMapping("/dashboard")
-	   public String home(Model model, HttpSession session, @ModelAttribute("us")UserProject us ) {
+	   public String home(Model model, HttpSession session) {
 	   List <Project> projects = projectService.findallprojects();
 	model.addAttribute("projects", projects);
 	       if (session.getAttribute("user_id") != null) {
@@ -91,9 +91,11 @@ public class HomeController {
 	       model.addAttribute("thisuser", thisUser);
 	       List <Project> projectsin = projectService.findallprojectsinuser(thisUser);
 	       List <Project> projectsnotin = projectService.findallprojectsnotinuser(thisUser);
+	       List <Project> projectsinboth = projectService.findallprojectsinusers(user_id, user_id);
 	       
 	       model.addAttribute("projectsnot", projectsnotin);
 	       model.addAttribute("projectsin", projectsin);
+	       model.addAttribute("projectsinboth", projectsinboth);
 	       
 	      
 	       return "welcome.jsp";
@@ -105,15 +107,38 @@ public class HomeController {
 	       }
 	   }
 	   
-	   @PostMapping("/projects/{id}/join")
+	   @GetMapping("/dashboard/join/{id}")
 	   public String jointheteam(HttpSession session, @PathVariable("id")Long id, Model model) {
 		   Long user_id = (Long) session.getAttribute("user_id");
 		
-		   projectService.jointeam(id, user_id);
+		   
+			
+			Project project = projectService.findone(id);
+//			User user = userService.findUserById(user_id);
+//			List <Project> usersprojects= user.getProjects();
+//			
+//			 usersprojects.add(project);
+//			 user.setProjects(usersprojects);
+//			userService.updateuser(user);
+			projectService.jointeam(id, user_id);
 	      
 		   
-		   return "redirect:/dashboard";
+		   return "redirect:/dashboard";		   
 		   
+	   }
+	   
+	   @GetMapping("/dashboard/leave/{id}")
+	   public String leavetheteam(HttpSession session, @PathVariable("id")Long id, Model model) {
+		   Long user_id = (Long) session.getAttribute("user_id");
+		
+		   
+			
+			
+//			
+			projectService.leaveteam(id, user_id);
+	      
+		   
+		   return "redirect:/dashboard";		   
 		   
 	   }
 	   

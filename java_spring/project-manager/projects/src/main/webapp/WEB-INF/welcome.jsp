@@ -50,9 +50,7 @@
         <td><c:out value="${project.lead.firstName}"></c:out></td>
          <td><c:out value="${project.dueDate}"></c:out></td>
          <td>
-         <form action="/projects/${project.id}/join" method="post">
-         <input class="input" class="button" type="submit" value="Join the team"/>
-</form>
+           <a href="/dashboard/join/${project.id}">Join the team</a>
       </td>
       
        
@@ -84,7 +82,7 @@
     </tr>
   </thead>
   <tbody>
-  <c:forEach var="projectx" items="${thisuser.myprojects}">
+  <c:forEach var="projectx" items="${projectsinboth}">
     <tr>
      
       
@@ -97,10 +95,10 @@
 <c:choose> 
   <c:when test="${thisuser.id == projectx.lead.id}">
   
-<a href="/projects/${projectx.id}/edit">Edit</a>|
+<a href="/projects/${projectx.id}/edit">Edit</a>
   </c:when>
   <c:otherwise>
-   <a href="/projects/${projectx.id}/leave">Leave the team</a>
+   <a href="/dashboard/leave/${projectx.id}">Leave the team</a>
   </c:otherwise>
 </c:choose>
  

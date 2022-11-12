@@ -123,4 +123,16 @@ public Project jointeam(Long id1, Long id2){
 	
 }
 
+public Project leaveteam(Long id1, Long id2){
+	Project thisproject = findone(id1);
+	Optional <User> optionaluser = userRepository.findById(id2);
+	User thisuser = optionaluser.get();
+	thisproject.getUseres().remove(thisuser);
+	
+	
+	return projectRepository.save(thisproject);
+	
+	
+}
+
 }
