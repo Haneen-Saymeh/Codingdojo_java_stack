@@ -13,6 +13,6 @@ import com.haninz.bookclub.models.Book;
 public interface BookRepository extends CrudRepository <Book, Long> {
 	
 	 List<Book> findAll();
-	  List<Book>findByUserbIdIsOrUserIdIs(Long id, Long id2);
+	 List<Book>findByUserbIdIsOrUserIdIs(Long id, Long id2);
 
 }
