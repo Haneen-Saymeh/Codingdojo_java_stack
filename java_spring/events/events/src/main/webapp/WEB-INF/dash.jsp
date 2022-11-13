@@ -23,7 +23,7 @@
 		<h3>Here are some events in your state</h3>
 
 		<a href="/logout">Logout</a> 
-			style="margin-left: 700px">+ Add new project</a>
+
 
 
 		<table class="table">
@@ -33,7 +33,7 @@
 
 					<th scope="col">Name</th>
 					<th scope="col">Date</th>
-					<th scope="col">Location</th>
+					
 					<th scope="col">Host</th>
 						<th scope="col">Action/status</th>
 
@@ -42,21 +42,29 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="project" items="${projectsnot}">
+				<c:forEach var="event" items="${eventsin}">
 					<tr>
-						<c:if test="${thisuser.id != project.lead.id}">
+					
 
-							<td><a href="/projects/${project.id}"><c:out
-										value="${project.title}"></c:out></a></td>
+							<td><a href="/events/${event.id}"><c:out
+										value="${event.name}"></c:out></a></td>
+										<td><c:out value="${event.date}"></c:out></td>
 
-							<td><c:out value="${project.lead.firstName}"></c:out></td>
-							<td><c:out value="${project.dueDate}"></c:out></td>
-							<td><a href="/dashboard/join/${project.id}">Join the
-									team</a></td>
+							<td><c:out value="${event.host.firstName}"></c:out></td>
+							
+							<td><c:choose>
+								<c:when test="${thisuser.id == event.host.id}">
+
+									<a href="/events/${event.id}/edit">Edit</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/dashboard/join/${event.id}">Join the team</a>
+								</c:otherwise>
+							</c:choose></td>
 
 
-						</c:if>
 
+					
 					</tr>
 
 				</c:forEach>
@@ -76,7 +84,7 @@
 				
 					<th scope="col">Name</th>
 					<th scope="col">Date</th>
-					<th scope="col">Location</th>
+					
 					<th scope="col">state</th>
 					<th scope="col">Host</th>
 						<th scope="col">Action/status</th>
@@ -86,22 +94,24 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="projectx" items="${projectsinboth}">
+				<c:forEach var="event" items="${eventsnotin}">
 					<tr>
 
 
-						<td><a href="/projects/${projectx.id}"><c:out
-									value="${projectx.title}"></c:out></a></td>
+						<td><a href="/events/${event.id}"><c:out
+									value="${event.name}"></c:out></a></td>
+										<td><c:out value="${event.date}"></c:out></td>
+											<td><c:out value="${event.state}"></c:out></td>
 
-						<td><c:out value="${projectx.lead.firstName}"></c:out></td>
-						<td><c:out value="${projectx.dueDate}"></c:out></td>
+						<td><c:out value="${event.host.firstName}"></c:out></td>
+					
 						<td><c:choose>
-								<c:when test="${thisuser.id == projectx.lead.id}">
+								<c:when test="${thisuser.id == event.host.id}">
 
-									<a href="/projects/${projectx.id}/edit">Edit</a>
+									<a href="/events/${event.id}/edit">Edit</a>
 								</c:when>
 								<c:otherwise>
-									<a href="/dashboard/leave/${projectx.id}">Leave the team</a>
+									<a href="/dashboard/join/${event.id}">Join the team</a>
 								</c:otherwise>
 							</c:choose></td>
 
@@ -115,7 +125,35 @@
 			</tbody>
 		</table>
 
+<h1>Create an event!</h1>
 
+<form:form action="/dashboard/create" method="post" modelAttribute="event">
+<form:input type="hidden"  path="host" value="${thisuser.id}"/>
+  <div class="form-group">
+    <form:label  path="name">Name</form:label>
+     <form:errors path="name" class="text-danger" />
+    <form:input type="text" class="form-control"  aria-describedby="emailHelp"  path="name"></form:input>
+    </div>
+   
+  <div class="form-group">
+    <form:label  path="date">Date</form:label>
+     <form:errors path="date" class="text-danger" />
+    <form:input type="date" class="form-control"  aria-describedby="emailHelp"  path="date"></form:input>
+    </div>
+    
+  <div class="form-group">  
+    <form:select path="state">
+       
+           
+  <form:option value="CA">CA</form:option>
+  <form:option value="WA">WA</form:option>
+  <form:option value="AZ">AZ</form:option>
+     
+       
+    </form:select>
+     </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form:form>
 	</div>
 </body>
 </html>

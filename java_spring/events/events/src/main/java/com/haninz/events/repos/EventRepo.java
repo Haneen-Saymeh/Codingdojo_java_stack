@@ -12,6 +12,6 @@ import com.haninz.events.models.User;
 public interface EventRepo extends CrudRepository<Event, Long>{
 	List<Event> findAll();
 	List<Event> findByState(String state);
-	List<Event> findByStateNotIn(String state);
+	List<Event> findByStateNotContains(String state);
 
 }

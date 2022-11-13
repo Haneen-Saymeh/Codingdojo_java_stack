@@ -1,5 +1,7 @@
 package com.haninz.events.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -8,8 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
+import com.haninz.events.models.Event;
 import com.haninz.events.models.LoginUser;
 import com.haninz.events.models.User;
 import com.haninz.events.services.AppService;
@@ -64,20 +69,19 @@ public class mainController {
 	   
 	   
 	   @GetMapping("/dashboard")
-	   public String home(Model model, HttpSession session) {
+	   public String home(Model model, HttpSession session, @ModelAttribute("event") Event event) {
 //	   List <Project> projects = projectService.findallprojects();
 //	model.addAttribute("projects", projects);
 	       if (session.getAttribute("user_id") != null) {
 	       Long user_id = (Long) session.getAttribute("user_id");
 	       User thisUser = appService.findUserById(user_id);
 	       model.addAttribute("thisuser", thisUser);
-//	       List <Project> projectsin = projectService.findallprojectsinuser(thisUser);
-//	       List <Project> projectsnotin = projectService.findallprojectsnotinuser(thisUser);
-//	       List <Project> projectsinboth = projectService.findallprojectsinusers(user_id, user_id);
-//	       
-//	       model.addAttribute("projectsnot", projectsnotin);
-//	       model.addAttribute("projectsin", projectsin);
-//	       model.addAttribute("projectsinboth", projectsinboth);
+	       String statex = thisUser.getState();
+	       List <Event> eventsnotin = appService.findalleventsnotinstate(statex);
+	       List <Event> eventsin = appService.findalleventsinstate(statex);
+//	      
+	       model.addAttribute("eventsnotin", eventsnotin);
+	       model.addAttribute("eventsin", eventsin);
 //	       
 	      
 	       return "dash.jsp";
@@ -88,5 +92,63 @@ public class mainController {
 	           return "redirect:/";
 	       }
 	   }
+	   
+	   
+	   @PostMapping("/dashboard/create")
+	   public String createbook(@Valid  @ModelAttribute("event") Event event, BindingResult result,HttpSession session) {
+		   if (result.hasErrors()) {
+			   return "dash.jsp";
+		   }
+		   else {
+			   
+//			  
+		     
+		       appService.createevent(event);
+		     
+			   return "redirect:/dashboard";
+			   
+		   }
+	   }
+	   
+	   
+	   @GetMapping("/events/{id}/edit")
+	   public String editevent(@PathVariable("id")Long id, Model model,HttpSession session) {
+		   Long user_id = (Long) session.getAttribute("user_id");
+	       User thisUser = appService.findUserById(user_id);
+	       model.addAttribute("thisuser", thisUser);
+		   Event event= appService.findoneevent(id);
+		   model.addAttribute("event", event);
+		   return "edit.jsp";
+	   }
+	   
+	   @PutMapping("/events/{id}/edit")
+	   public String updatebook(@Valid @ModelAttribute("event")Event event, BindingResult result,HttpSession session) {
+		   if (result.hasErrors()) {
+			    return "edit.jsp";
+		   }
+		   else {
+			   
+		       appService.updateevent(event);
+			  
+			   return "redirect:/dashboard";
+			   
+			   
+		   }
+			  
+	   }	
+	   
+	   
+	   @GetMapping("/events/{id}")
+	   public String showbook(@PathVariable("id") Long id, Model model,HttpSession session ) {
+		  
+		   Event theevent = appService.findoneevent(id);
+		   model.addAttribute("theevent", theevent);
+		    Long user_id = (Long) session.getAttribute("user_id");
+	       User thisUser = appService.findUserById(user_id);
+	       model.addAttribute("thisuser", thisUser);
+		   
+		   return "one.jsp";
+	   }
+	   
 
 }

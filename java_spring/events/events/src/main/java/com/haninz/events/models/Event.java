@@ -36,7 +36,7 @@ public class Event {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date date;
 	@NotEmpty(message="Event's location is required!")
-	private String location;
+	private String state;
 	
 	@Column(updatable=false)
     @DateTimeFormat(pattern="yyyy-MM-dd")
@@ -91,11 +91,11 @@ public class Event {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public String getLocation() {
-		return location;
+	public String getState() {
+		return state;
 	}
-	public void setLocation(String location) {
-		this.location = location;
+	public void setState(String state) {
+		this.state = state;
 	}
 	public Date getCreatedAt() {
 		return createdAt;
