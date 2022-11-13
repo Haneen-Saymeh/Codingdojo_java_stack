@@ -20,9 +20,9 @@
 	<div
 		style="width: 1000px; height: 1000px; padding: 10px; margin: 0 auto">
 		<h1 style="text-align: center;">Welcome "${thisuser.firstName}"</h1>
-		<h3>All projects</h3>
+		<h3>Here are some events in your state</h3>
 
-		<a href="/logout">Logout</a> <a href="/projects/new"
+		<a href="/logout">Logout</a> 
 			style="margin-left: 700px">+ Add new project</a>
 
 
@@ -31,10 +31,11 @@
 				<tr>
 
 
-					<th scope="col">Project</th>
-					<th scope="col">Team Lead</th>
-					<th scope="col">Due Date</th>
-					<th scope="col">Actions</th>
+					<th scope="col">Name</th>
+					<th scope="col">Date</th>
+					<th scope="col">Location</th>
+					<th scope="col">Host</th>
+						<th scope="col">Action/status</th>
 
 
 
@@ -65,17 +66,20 @@
 		</table>
 
 		<hr>
-		<h3>My projects</h3>
+		<h3>Some events in other states</h3>
 
 		<table class="table">
 			<thead class="thead-dark">
 				<tr>
 
 
-					<th scope="col">Project</th>
-					<th scope="col">Team Lead</th>
-					<th scope="col">Due Date</th>
-					<th scope="col">Actions</th>
+				
+					<th scope="col">Name</th>
+					<th scope="col">Date</th>
+					<th scope="col">Location</th>
+					<th scope="col">state</th>
+					<th scope="col">Host</th>
+						<th scope="col">Action/status</th>
 
 
 

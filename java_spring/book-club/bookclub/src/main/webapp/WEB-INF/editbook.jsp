@@ -18,6 +18,8 @@
 <a href="/books" >Back to shelves</a>
 <form:form action="/books/${book.id}/edit" method="post" modelAttribute="book">
  <input type="hidden" name="_method" value="put">
+ <form:input type="hidden" path="user" value="${thisuser.id}"/>
+ <form:input type="hidden" path="userb" />
   <div class="form-group">
     <form:label  path="title">Title</form:label>
      <form:errors path="title" class="text-danger" />

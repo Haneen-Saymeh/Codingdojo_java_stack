@@ -39,40 +39,8 @@ private final UserRepository userRepository;
 		
 	
 
-//	public Book updatebook(Book book,Long id) {
-//		Optional <User> updatedby = userRepository.findById(id);
-//		book.setUser(updatedby.get());
-//		Optional <User> borrower = userRepository.findById(book.getUserb().getId());
-//		if(borrower.isPresent()) {
-//			book.setUserb(borrower.get());
-//			return bookRepository.save(book);
-//
-//			
-//		}
-//		else {
-//			book.setUserb(null);
-//		return bookRepository.save(book);
-//		}
-//
-//
-//	}
 
-//	public Book borrowbook(Book book,Long id ) {
-//		Optional <User> borrowedby = userRepository.findById(id);
-//		book.setUserb(borrowedby.get());
-//		return bookRepository.save(book);
-//
-//
-//
-//	}
 
-//	public void returnbook(Book book) {
-//		
-//		book.setUserb(null);
-//		
-//		
-//		 bookRepository.save(book);
-//	}
 
 	public Project findone(Long id) {
 		Optional <Project> optionalproject = projectRepository.findById(id);

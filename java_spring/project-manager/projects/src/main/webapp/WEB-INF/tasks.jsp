@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <%@ page isErrorPage="true" %>
 <!DOCTYPE html>
 <html>
@@ -15,6 +16,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div  style="width:1000px; height:1000px; padding:10px; margin:0 auto">
 <h1>Project Details</h1>
 
 
@@ -39,7 +41,7 @@
 
 <c:forEach var="task" items="${theproject.tasks}">
 
-<h3>Added by <c:out value = "${task.creator.firstName}"/> at <c:out value = "${task.createdAt}"/></h3>
+<h3>Added by <c:out value = "${task.creator.firstName}"/> at  <fmt:formatDate value="${task.createdAt}" pattern="h:mm a MMMM dd"/></h3>
 <p><c:out value = "${task.name}"/></p>
 
 
@@ -54,7 +56,7 @@
 
 <div><a href="/dashboard">Dashboard</a></div>
 
-
+</div>
 
 </body>
 </html>

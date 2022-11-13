@@ -149,11 +149,11 @@ model.addAttribute("books", books);
 		    return "editbook.jsp";
 	   }
 	   else {
-		   Long user_id = (Long) session.getAttribute("user_id");
-//		  User borrowuser = book.getUserb();
+//		   Long user_id = (Long) session.getAttribute("user_id");
+////		  User borrowuser = book.getUserb();
 		  
 		      
-	       bookService.updatebook(book, user_id);
+	       bookService.updatebook(book);
 		  
 		   return "redirect:/books";
 		   

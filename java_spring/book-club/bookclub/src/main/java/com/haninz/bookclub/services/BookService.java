@@ -29,22 +29,13 @@ public Book creatbook(Book book) {
 	
 }
 
-public Book updatebook(Book book,Long id) {
-	Optional <User> updatedby = userRepository.findById(id);
-	book.setUser(updatedby.get());
-	Optional <User> borrower = userRepository.findById(book.getUserb().getId());
-	if(borrower.isPresent()) {
-		book.setUserb(borrower.get());
+public Book updatebook(Book book) {
+//	Optional <User> updatedby = userRepository.findById(id);
+//	book.setUser(updatedby.get());
+//	Optional <User> borrower = userRepository.findById(book.getUserb().getId());
+//	if(borrower.isPresent()) {
+//		book.setUserb(borrower.get());
 		return bookRepository.save(book);
-
-		
-	}
-	else {
-		book.setUserb(null);
-	return bookRepository.save(book);
-	}
-
-
 }
 
 public Book borrowbook(Book book,Long id ) {
