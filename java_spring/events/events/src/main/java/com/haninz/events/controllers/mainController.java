@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 import com.haninz.events.models.Event;
 import com.haninz.events.models.LoginUser;
+import com.haninz.events.models.Message;
 import com.haninz.events.models.User;
 import com.haninz.events.services.AppService;
 @Controller
@@ -139,7 +141,7 @@ public class mainController {
 	   
 	   
 	   @GetMapping("/events/{id}")
-	   public String showbook(@PathVariable("id") Long id, Model model,HttpSession session ) {
+	   public String showevent(@PathVariable("id") Long id, Model model,HttpSession session,  @ModelAttribute("m")Message m ) {
 		  
 		   Event theevent = appService.findoneevent(id);
 		   model.addAttribute("theevent", theevent);
@@ -148,6 +150,37 @@ public class mainController {
 	       model.addAttribute("thisuser", thisUser);
 		   
 		   return "one.jsp";
+	   }
+	   
+	   
+	   @PostMapping("/events/{id}/comment")
+	   public String createmessage(@Valid  @ModelAttribute("m")Message m , BindingResult result,HttpSession session,Model model,@PathVariable("id") Long id) {
+		   Event theevent = appService.findoneevent(id);
+		   model.addAttribute("theevent", theevent);
+		    Long user_id = (Long) session.getAttribute("user_id");
+	       User thisUser = appService.findUserById(user_id);
+	       model.addAttribute("thisuser", thisUser);
+		   if (result.hasErrors()) {
+			   return "one.jsp";
+		   }
+		   else {
+			   
+//			  
+		     
+		       appService.createmesg(m);
+		     
+			   return "redirect:/events/{id}";
+			   
+		   }
+	   }
+	   
+	   @GetMapping("/dashboard/join/{id}")
+	   public String joinevent(@PathVariable("id") Long id, Model model,HttpSession session) {
+		   Long user_id = (Long) session.getAttribute("user_id");
+		   
+		   appService.jointeam(id, user_id);
+		   return "redirect:/dashboard";
+		   
 	   }
 	   
 

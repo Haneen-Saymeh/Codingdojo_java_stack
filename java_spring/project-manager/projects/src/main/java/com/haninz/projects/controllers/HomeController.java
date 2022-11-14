@@ -229,12 +229,13 @@ public class HomeController {
 	   
 	   @PostMapping("/projects/{id}/tasks/create")
 	   public String createtask(@Valid @ModelAttribute("task")Task task, BindingResult result,HttpSession session, Model model,@PathVariable("id") Long id) {
+		   Project theproject = projectService.findone(id);
+		   model.addAttribute("theproject", theproject);
+		   Long user_id = (Long) session.getAttribute("user_id");
+	       User thisUser = userService.findUserById(user_id);
+	       model.addAttribute("thisuser", thisUser);
 		   if (result.hasErrors()) {
-			   Project theproject = projectService.findone(id);
-			   model.addAttribute("theproject", theproject);
-			   Long user_id = (Long) session.getAttribute("user_id");
-		       User thisUser = userService.findUserById(user_id);
-		       model.addAttribute("thisuser", thisUser);
+			  
 			    return "tasks.jsp";
 		   }
 		   else {

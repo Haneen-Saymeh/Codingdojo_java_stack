@@ -4,23 +4,28 @@ import java.util.List;
 import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
+
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import com.haninz.events.models.Event;
 import com.haninz.events.models.LoginUser;
+import com.haninz.events.models.Message;
 import com.haninz.events.models.User;
 import com.haninz.events.repos.EventRepo;
+import com.haninz.events.repos.MessageRepo;
 import com.haninz.events.repos.UserRepo;
 
 @Service
 public class AppService {
 	private final UserRepo userRepo;
 	private final  EventRepo  eventRepo;
+	private final MessageRepo messageRepo;
 	
-	public AppService(UserRepo userRepo, EventRepo  eventRepo) {
+	public AppService(UserRepo userRepo, EventRepo  eventRepo, MessageRepo messageRepo) {
 		this.userRepo=userRepo;
 		this.eventRepo=eventRepo;
+		this.messageRepo=messageRepo;
 		
 	}
 	public User register(User newUser, BindingResult result) {
@@ -116,6 +121,38 @@ public class AppService {
 		public List<Event> findalleventsinstate(String state){
 			return eventRepo.findByState(state);
 		}
+		
+		
+		public Event jointeam(Long id1, Long id2){
+			Event thisevent = findoneevent(id1);
+			Optional <User> optionaluser = userRepo.findById(id2);
+			User thisuser = optionaluser.get();
+			thisevent.getAttendees().add(thisuser);
+			
+			
+			return eventRepo.save(thisevent);
+			
+			
+		}
+
+		public Event leaveteam(Long id1, Long id2){
+			Event thisevent = findoneevent(id1);
+			Optional <User> optionaluser =  userRepo.findById(id2);
+			User thisuser = optionaluser.get();
+			thisevent.getAttendees().remove(thisuser);
+			
+			
+			return eventRepo.save(thisevent);
+			
+			
+		}
+		
+		
+		
+		 public Message createmesg(Message m) {
+
+				return messageRepo.save(m);
+			}
 		
 		
 	
