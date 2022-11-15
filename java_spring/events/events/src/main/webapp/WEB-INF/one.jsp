@@ -17,6 +17,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div style="width: 1000px; height: 1000px; padding: 10px; margin: 0 auto">
 <h1><c:out value = "${theevent.name}"/></h1>
 
 
@@ -93,7 +94,7 @@
 
 <div><a href="/dashboard">Dashboard</a></div>
 
-
+</div>
 
 </body>
 </html>

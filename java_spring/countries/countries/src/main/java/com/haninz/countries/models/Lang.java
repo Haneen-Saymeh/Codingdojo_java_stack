@@ -4,47 +4,115 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="langs")
+@Table(name="languages")
 public class Lang {
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@NotEmpty(message="Title is required!")
-	@Size(max=3, message="Code must be at most 3 characters long")
-	private String code;
-	@NotEmpty(message="Language is required!")
-	@Size(max=30, message="Language must be at most 30 characters long")
-	private String language;
-	@NotEmpty(message="Language is required!")
-	private boolean offical;
-	@NotEmpty(message="Language is required!")
-	private Double percentage;
+    private Long id;
 	
+	 
+	    private Character language;
 	
+	 
+	 private Character code;
 	
-	@Column(updatable=false)
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date createdAt;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date updatedAt;
-    
-    @PrePersist
-    protected void onCreate(){
-        this.createdAt = new Date();
-    }
-    @PreUpdate
-    protected void onUpdate(){
-        this.updatedAt = new Date();
-    }
+	 private Float percentage;
+	
+	 private String official;
+	   
+	 	@ManyToOne(fetch = FetchType.LAZY)
+	    @JoinColumn(name="country_id")
+		private Country country ;
+
+	 	private Date createdAt;
+		@DateTimeFormat(pattern="yyyy-MM-dd")
+		private Date updatedAt;
+		@PrePersist
+		protected void onCreate(){
+		    this.createdAt = new Date();
+		}
+		@PreUpdate
+		protected void onUpdate(){
+		    this.updatedAt = new Date();
+		}
+	 
+	 
+	public Date getCreatedAt() {
+			return createdAt;
+		}
+		public void setCreatedAt(Date createdAt) {
+			this.createdAt = createdAt;
+		}
+		public Date getUpdatedAt() {
+			return updatedAt;
+		}
+		public void setUpdatedAt(Date updatedAt) {
+			this.updatedAt = updatedAt;
+		}
+	public Lang() {}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Character getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(Character language) {
+		this.language = language;
+	}
+
+	public Character getCode() {
+		return code;
+	}
+
+	public void setCode(Character code) {
+		this.code = code;
+	}
+
+	public Float getPercentage() {
+		return percentage;
+	}
+
+	public void setPercentage(Float percentage) {
+		this.percentage = percentage;
+	}
+
+	public String getOfficial() {
+		return official;
+	}
+
+	public void setOfficial(String official) {
+		this.official = official;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
+	
 }
