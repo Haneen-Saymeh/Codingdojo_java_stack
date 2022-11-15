@@ -239,8 +239,10 @@ public class HomeController {
 			    return "tasks.jsp";
 		   }
 		   else {
-			   
-		       taskService.creattask(task);
+			  
+//			   theproject.getTasks().add(task);
+			   taskService.creattask(task);
+//		       projectService.updateproject(theproject);
 			  
 			   return "redirect:/projects/{id}/tasks";
 			   

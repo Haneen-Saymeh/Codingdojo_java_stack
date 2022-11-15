@@ -20,6 +20,7 @@
 <input type="hidden" name="_method" value="put">
 <form:input type="hidden"  path="host" value="${thisuser.id}"/>
 <form:input type="hidden"  path="attendees"/>
+<form:input type="hidden"  path="messages" />
   <div class="form-group">
     <form:label  path="name">Name</form:label>
      <form:errors path="name" class="text-danger" />

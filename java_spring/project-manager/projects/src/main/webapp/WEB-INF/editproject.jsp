@@ -20,6 +20,8 @@
 <form:form action="/projects/${project.id}/edit" method="post" modelAttribute="project">
 <input type="hidden" name="_method" value="put">
 <form:input type="hidden"  path="lead" value="${thisuser.id}"/>
+<form:input type="hidden"  path="tasks" />
+<form:input type="hidden"  path="users" />
 
   <div class="form-group">
     <form:label  path="title">Title</form:label>
