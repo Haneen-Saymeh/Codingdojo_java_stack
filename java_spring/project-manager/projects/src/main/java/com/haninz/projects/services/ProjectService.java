@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.haninz.projects.models.Project;
 import com.haninz.projects.models.User;
 import com.haninz.projects.repositories.ProjectRepository;
-import com.haninz.projects.repositories.TaskRepository;
+
 import com.haninz.projects.repositories.UserRepository;
 
 @Service

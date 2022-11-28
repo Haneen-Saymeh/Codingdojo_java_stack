@@ -24,6 +24,13 @@ import com.haninz.projects.services.ProjectService;
 import com.haninz.projects.services.TaskService;
 
 import com.haninz.projects.services.UserService;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.http.HttpResponse.BodyHandlers;
+import java.net.URI;
+import java.io.IOException;
+
 
 @Controller
 public class HomeController {
@@ -249,6 +256,26 @@ public class HomeController {
 			   
 		   }
 			  
+	   }
+	   
+	   @GetMapping("/cup")
+	   public void sthapi() throws IOException, InterruptedException{
+		   HttpClient client = HttpClient.newHttpClient();
+		   HttpRequest request = HttpRequest.newBuilder()
+		                                    .uri(URI.create("https://api.football-data.org/v4/competitions/2000/standings"))
+		                                    .header("X-Auth-Token", "a2bafb415467487eb8be3238b4a3c971")
+		                                    .build();
+
+		   HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+		   System.out.println(response.statusCode());
+		   System.out.println(response.body());
+	   }
+	   
+	   
+	   @GetMapping("/api")
+	   public String showteam() {
+		  
+		   return "api.jsp";
 	   }
 	   
 

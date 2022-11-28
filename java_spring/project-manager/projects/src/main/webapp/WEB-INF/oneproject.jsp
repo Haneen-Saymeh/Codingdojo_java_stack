@@ -6,6 +6,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+<!-- YOUR own local CSS -->
+<link rel="stylesheet" href="/css/main.css"/>
+
+<!-- For any Bootstrap that uses JS or jQuery-->
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
@@ -34,5 +42,10 @@
 
 <div><a href="/projects/${theproject.id}/tasks">Check tasks</a></div>
 
+
 </body>
+<script>src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"</script>
+<script>
+function getStandings()
+</script>
 </html>

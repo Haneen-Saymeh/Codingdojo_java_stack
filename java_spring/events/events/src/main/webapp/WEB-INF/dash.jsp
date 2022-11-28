@@ -43,7 +43,7 @@
 			</thead>
 			<tbody>
 				<c:forEach var="event" items="${eventsin}">
-				<c:forEach var="attend" items="${event.attendees}">
+				
 					<tr>
 					
 
@@ -54,27 +54,30 @@
 							<td><c:out value="${event.host.firstName}"></c:out></td>
 							
 							<td>
-							<c:choose>  
-    <c:when test="${thisuser.id == event.host.id}">  
-      <a href="/events/${event.id}/edit">Edit</a> 
-    </c:when>  
-    	
-    <c:when test="${thisuser.id == attend.id}">  
-     
-       <a href="/dashboard/cancel/${event.id}">Cancel</a> 
-     
-    </c:when>  
-    <c:otherwise>  
-       <a href="/dashboard/join/${event.id}">Join the team</a> 
-    </c:otherwise>  
-</c:choose>  
+							 <c:choose>
+    		<c:when test="${event.host.id==thisuser.id}">
+       
+     			<a href="edit/event/${event.id }">edit</a> || <a href="delete/event/${event.id}">Delete</a>
+     			
+		     	
+		        <br />
+		    </c:when> 
+			     <c:when test="${thisuser.getEvents().contains(event)}">
+	            	Joining ||	<a href="/leaveevent/${event.id}">Cancel</a>
+	         	</c:when> 
+		    <c:otherwise>
+		    
+        				<a href="/join/event/${event.id}">Join</a>
+        <br />
+   		 </c:otherwise>  
+		</c:choose>
 							</td>
 
 
 
 					
 					</tr>
- </c:forEach>
+
 				</c:forEach>
 
 
@@ -114,22 +117,27 @@
 
 						<td><c:out value="${event.host.firstName}"></c:out></td>
 					
-						<td>
+					
 						
-								<c:choose>  
-    <c:when test="${thisuser.id == event.host.id}">  
-      <a href="/events/${event.id}/edit">Edit</a> 
-    </c:when>  
-    	
-    <c:when test="${thisuser.id == attend.id}">  
-     
-       <a href="/dashboard/cancel/${event.id}">Cancel</a> 
-     
-    </c:when>  
-    <c:otherwise>  
-       <a href="/dashboard/join/${event.id}">Join the team</a> 
-    </c:otherwise>  
-</c:choose>  
+								<td>
+         <c:choose>
+    		<c:when test="${event.host.id==thisuser.id}">
+       
+     			<a href="edit/event/${event.id }">edit</a> || <a href="delete/event/${event.id}">Delete</a>
+     			
+		     	
+		        <br />
+		    </c:when> 
+			     <c:when test="${thisuser.getEvents().contains(event)}">
+	            	Joining ||	<a href="/leaveevent/${event.id}">Cancel</a>
+	         	</c:when> 
+		    <c:otherwise>
+		    
+        				<a href="/join/event/${event.id}">Join</a>
+        <br />
+   		 </c:otherwise>  
+		</c:choose>
+		
 							</td>
 
 

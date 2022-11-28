@@ -3,6 +3,7 @@ package com.haninz.projects.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -67,7 +68,7 @@ public class Project {
     
     
    
-    @OneToMany(mappedBy="project", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="project", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Task> tasks;
     
     public Project() {
